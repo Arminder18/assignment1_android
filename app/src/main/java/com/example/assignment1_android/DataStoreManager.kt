@@ -42,7 +42,7 @@ class DataStoreManager(private val context: Context) {
     val getCourseName: Flow<String> = context.dataStore.data
         .map { preferences -> preferences[COURSE_NAME_KEY] ?: "" }
 
-    // Reset student details (clear the preferences)
+    // Reset student details
     suspend fun resetData() {
         context.dataStore.edit { preferences ->
             preferences.remove(ID_KEY)
