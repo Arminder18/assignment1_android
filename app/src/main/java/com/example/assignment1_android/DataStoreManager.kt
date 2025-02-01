@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.map
 class DataStoreManager(private val context: Context) {
 
     companion object {
-        // Define the DataStore
+
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("user_data")
 
         // Define the keys for the preferences
