@@ -140,7 +140,7 @@ fun UserInputScreen() {
             onClick = {
                 coroutineScope.launch {
                     dataStoreManager.resetData()
-                    // Reset local state to default
+
                     id = "158"
                     username = ""
                     courseName = ""
