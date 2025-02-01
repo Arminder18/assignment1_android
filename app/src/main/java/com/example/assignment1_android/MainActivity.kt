@@ -160,7 +160,7 @@ fun UserInputScreen() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Display Student Details at Bottom Left
+        // Display Student Details
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.BottomStart
