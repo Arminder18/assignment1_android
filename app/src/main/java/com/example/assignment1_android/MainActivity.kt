@@ -38,7 +38,7 @@ fun UserInputScreen() {
     var username by remember { mutableStateOf("") }
     var courseName by remember { mutableStateOf("") }
 
-    // Variables for displaying the stored data (on button click)
+    // Variables for displaying the stored data
     var displayedId by remember { mutableStateOf("158") }
     var displayedUsername by remember { mutableStateOf("") }
     var displayedCourseName by remember { mutableStateOf("") }
@@ -47,14 +47,6 @@ fun UserInputScreen() {
     val storedId by dataStoreManager.getId.collectAsState(initial = "158") // Default to 158
     val storedUsername by dataStoreManager.getUserName.collectAsState(initial = "")
     val storedCourseName by dataStoreManager.getCourseName.collectAsState(initial = "")
-
-    // Update the UI with stored data when available
-    LaunchedEffect(storedId, storedUsername, storedCourseName) {
-        // Update only if Store or Load is pressed
-        displayedId = storedId
-        displayedUsername = storedUsername
-        displayedCourseName = storedCourseName
-    }
 
     Column(
         modifier = Modifier
@@ -130,19 +122,9 @@ fun UserInputScreen() {
             // Load Button
             Button(
                 onClick = {
-                    // Load data from DataStore and update displayed variables
-                    coroutineScope.launch {
-                        // Collect data from DataStore again to load it
-                        dataStoreManager.getId.collect { loadedId ->
-                            displayedId = loadedId
-                        }
-                        dataStoreManager.getUserName.collect { loadedUsername ->
-                            displayedUsername = loadedUsername
-                        }
-                        dataStoreManager.getCourseName.collect { loadedCourseName ->
-                            displayedCourseName = loadedCourseName
-                        }
-                    }
+                    displayedId = storedId
+                    displayedUsername = storedUsername
+                    displayedCourseName = storedCourseName
                 },
                 modifier = Modifier.weight(1f).height(70.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50))
@@ -184,10 +166,10 @@ fun UserInputScreen() {
             contentAlignment = Alignment.BottomStart
         ) {
             Text(
-                text = "Student Name: $displayedUsername \nStudent ID: $displayedId\nCourse: $displayedCourseName",
+                text = "Student Name: $displayedUsername \nStudent ID: $displayedId\nCourse Name: $displayedCourseName",
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Red,
+                color = Color.Black,
                 modifier = Modifier.padding(16.dp)
             )
         }
